@@ -1,0 +1,20 @@
+{
+  "name": "js-pong",
+  "version": "0.1.0",
+  "description": "Jumping into coding a simple game after a brief JS refresher.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "",
+    "build": "npm run build:babel && npm run build:browserify",
+    "build:babel": "babel src -d lib",
+    "build:browserify": "browserify lib/main.js -o bundle.js"
+  },
+  "author": "Mikolaj Gackowski",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6"
+  }
+}
