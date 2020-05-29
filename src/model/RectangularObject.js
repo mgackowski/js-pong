@@ -26,7 +26,7 @@ class RectangularObject {
     set width(width) {
         this._width = width;
     }
-    set height(heightxpos) {
+    set height(height) {
         this._height = height;
     }
 }
