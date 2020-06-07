@@ -10,5 +10,23 @@ playArea.objects.push(
 );
 
 console.log(playArea.objects.forEach((el) => {
-    console.log(`${el.xpos}, ${el.ypos}, ${el.width}, ${el.height}`);
+    console.log(`${el.id}, ${el.xpos}, ${el.ypos}, ${el.width}, ${el.height}`);
 }))
+
+const init = function() {
+    // create playarea and set objects on it
+    // initialise variables
+}
+
+const loop = function() {
+
+    // 1. take input
+        //read input
+        //call listeners on controllable objects
+            //e.g. update velocities, accelerations.
+    // 2. process logic (movement, scores etc.)
+        //calculate and object positions
+        //call listeners on collidable objects
+    // 3. render
+
+}

@@ -4,6 +4,8 @@ class PlayArea {
         this._width = width;
         this._height = height;
         this._objects = [];
+        this._controllableObjects = [];
+        this._collidableObjects = [];   //TODO: getters & setters
     }
 
     get width() {

@@ -1,6 +1,6 @@
-import RectangularObject from "../../lib/model/RectangularObject";
+import MovingObject from "../../lib/model/MovingObject";
 
-class Paddle extends RectangularObject {
+class Paddle extends MovingObject {
 
     constructor(xpos,ypos) {
         super(xpos,ypos,10,50);

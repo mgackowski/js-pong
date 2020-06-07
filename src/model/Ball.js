@@ -1,6 +1,6 @@
-import RectangularObject from "../../lib/model/RectangularObject";
+import MovingObject from "../../lib/model/MovingObject";
 
-class Ball extends RectangularObject {
+class Ball extends MovingObject {
 
     constructor(xpos,ypos) {
         super(xpos,ypos,10,10);

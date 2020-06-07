@@ -1,9 +1,15 @@
-class RectangularObject {
+import IDGenerator from "../util/IDGenerator";
+
+class GameObject {
     constructor(xpos, ypos, width, height) {
+        this._id = IDGenerator.createNewID();
         this._xpos = xpos;
         this._ypos = ypos;
         this._width = width;
         this._height = height;
+    }
+    get id() {
+        return this._id;
     }
     get xpos() {
         return this._xpos;
@@ -31,4 +37,4 @@ class RectangularObject {
     }
 }
 
-export default RectangularObject;
+export default GameObject;
