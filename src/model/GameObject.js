@@ -23,6 +23,12 @@ class GameObject {
     get height() {
         return this._height;
     }
+    get center() {
+        return {
+            x: this._xpos + this._width / 2,
+            y: this._ypos + this._height / 2
+        }
+    }
     set xpos(xpos) {
         this._xpos = xpos;
     }
