@@ -8,6 +8,9 @@ class GameObject {
         this._width = width;
         this._height = height;
     }
+    draw(context) {
+        //TODO: provides sprite for View.render
+    }
     get id() {
         return this._id;
     }

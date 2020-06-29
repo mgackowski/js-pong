@@ -34,3 +34,5 @@ class MovingObject extends GameObject {
     }
 
 }
+
+export default MovingObject;

@@ -1,4 +1,4 @@
-class PlayArea {
+class Level {
 
     constructor(width,height) {
         this._width = width;
@@ -26,4 +26,4 @@ class PlayArea {
 
 }
 
-export default PlayArea;
+export default Level;

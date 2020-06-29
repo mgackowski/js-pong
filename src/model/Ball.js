@@ -14,12 +14,6 @@ class Ball extends MovingObject {
         this._velocity.y += this._acceleration.y;
     }
 
-    draw(context) {
-        context.beginPath();
-        context.rect(this._xpos,this._ypos,this._width,this._height);
-        context.stroke;
-    }
-
     collide(withObj,side) {
         if(typeof withObj === "GameObject") {
             if(side === "top") {
@@ -48,7 +42,7 @@ class Ball extends MovingObject {
     }
 
     destroy() {
-        this = {};
+        //
     }
 
 }

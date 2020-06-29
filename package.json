@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "",
     "build": "npm run build:babel && npm run build:browserify",
-    "build:babel": "babel src -d lib",
-    "build:browserify": "browserify lib/main.js -o bundle.js"
+    "build:babel": "babel src -d lib --source-maps true",
+    "build:browserify": "browserify lib/main.js -o bundle.js --debug"
   },
   "author": "Mikolaj Gackowski",
   "license": "ISC",
