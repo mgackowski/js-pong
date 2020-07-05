@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+# babel.js output
+lib/
+bundle.js
+
+# node server
+server.js
