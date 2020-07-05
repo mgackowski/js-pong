@@ -8,6 +8,9 @@ class GameObject {
         this._width = width;
         this._height = height;
     }
+    step() {
+        //Override with custom behaviour
+    }
     draw(context) {
         //TODO: provides sprite for View.render
     }

@@ -1,44 +1,39 @@
 import MovingObject from "../../lib/model/MovingObject";
 import GameObject from "../../lib/model/GameObject";
+import LevelBoundary from "./LevelBoundary";
+import Paddle from "./Paddle";
 
 class Ball extends MovingObject {
 
     constructor(xpos,ypos) {
-        super(xpos,ypos,10,10);
-        this._velocity.x = 1;
-        this._velocity.y = 1;
+        super(xpos,ypos,20,20);
+        this._velocity.x = 200;
+        this._velocity.y = -200;
     }
 
-    step() { //TODO: extract to move()?
-        this._velocity.x += this._acceleration.x;
-        this._velocity.y += this._acceleration.y;
+    step() {
+
     }
 
-    collide(withObj,side) {
-        if(typeof withObj === "GameObject") {
-            if(side === "top") {
-                this._ypos = withObj.ypos + withObj.height;
-                this._velocity.y *= -1;
-            }
-            if(side === "bottom") {
-                this._ypos = withObj.ypos - this._height;
-                this._velocity.y *= -1;
-            }
-            if(side === "left") {
-                this._xpos = withObj.xpos + withObj._width;
-                this._velocity.x *= -1;
-            }
-            if(side === "right") {
-                this._xpos = withObj.xpos - this._width;
-                this._velocity.x *= -1;
-            }
+    collide(withObj) {
+        if(withObj instanceof LevelBoundary && withObj.type === "lower") {
+            this._ypos = withObj.ypos - this._height;
+            this._velocity.y *= -1;
         }
-        if(typeof withObj === "Paddle") {
+        else if(withObj instanceof LevelBoundary && withObj.type === "upper") {
+            this._ypos = withObj.ypos + withObj.height;
+            this._velocity.y *= -1;
+        };
+        if(withObj instanceof Paddle && this._velocity.x < 0) {
+            this._xpos = withObj.xpos + withObj._width;
+            this._velocity.x *= -1.1;
+        }
+        else if(withObj instanceof Paddle && this._velocity.x > 0) {
+            this._xpos = withObj.xpos - this._width;
+            this._velocity.x *= -1.1;
+        }
             //TODO: map change in angle to position
             //relative to Paddle
-            this._velocity.x *= 0.01;
-            this._velocity.y *= 0.01;
-        }
     }
 
     destroy() {

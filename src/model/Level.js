@@ -4,8 +4,9 @@ class Level {
         this._width = width;
         this._height = height;
         this._objects = [];
+        this._moveableObjects = [];
         this._controllableObjects = [];
-        this._collidableObjects = [];
+        this._collideableObjects = [];
     }
 
     get width() {
@@ -17,11 +18,14 @@ class Level {
     get objects() {
         return this._objects;
     }
+    get moveableObjects() {
+        return this._moveableObjects;
+    }
     get controllableObjects() {
         return this._controllableObjects;
     }
-    get collidableObjects() {
-        return this.__collidableObjects;
+    get collideableObjects() {
+        return this._collideableObjects;
     }
 
 }
