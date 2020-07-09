@@ -1,4 +1,4 @@
-import IDGenerator from "../util/IDGenerator";
+import IDGenerator from "../../util/IDGenerator";
 
 class GameObject {
     constructor(xpos, ypos, width, height) {
@@ -9,10 +9,10 @@ class GameObject {
         this._height = height;
     }
     step() {
-        //Override with custom behaviour
+        //custom step event
     }
     draw(context) {
-        //TODO: provides sprite for View.render
+        //custom draw event
     }
     get id() {
         return this._id;

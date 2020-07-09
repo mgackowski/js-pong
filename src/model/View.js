@@ -35,7 +35,7 @@ class View {
         };
 
         this._level.objects.forEach((el) => {
-            if ( true ) { // TODO: no sprite check
+            if ( true ) { // TODO: look for sprite in draw() method
                 context.beginPath();
                 context.fillStyle = "#888888";
                 context.fillRect(

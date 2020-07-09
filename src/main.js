@@ -1,11 +1,11 @@
-import Paddle from './model/Paddle.js';
+import Paddle from './model/gameobjects/Paddle.js';
 import Level from './model/Level.js';
-import Ball from './model/Ball.js';
-import View from './View.js';
-import Controller from './Controller.js';
-import GameObject from './model/GameObject.js';
-import Collider from './Collider.js';
-import LevelBoundary from './model/LevelBoundary.js';
+import Ball from './model/gameobjects/Ball.js';
+import View from './model/View.js';
+import Controller from './model/Controller.js';
+import GameObject from './model/gameobjects/GameObject.js';
+import Collider from './model/Collider.js';
+import LevelBoundary from './model/gameobjects/LevelBoundary.js';
 
 const Game = {
 
@@ -18,17 +18,21 @@ const Game = {
             Game.playArea.width,Game.playArea.height,"upper");
         let lowerBoundary = new LevelBoundary(
             Game.playArea.width,Game.playArea.height,"lower");
+        let leftBoundary = new LevelBoundary(
+            Game.playArea.width,Game.playArea.height,"left");
+        let rightBoundary = new LevelBoundary(
+            Game.playArea.width,Game.playArea.height,"right");
 
         let ball = new Ball((this.playArea.width/2)-10,(this.playArea.height/2)-10);
-        let leftPaddle = new Paddle(10,(this.playArea.height/2)-50);
-        let rightPaddle = new Paddle(this.playArea.width-30,(this.playArea.height/2)-50);
+        let leftPaddle = new Paddle(10,(this.playArea.height/2)-50,"P1");
+        let rightPaddle = new Paddle(this.playArea.width-30,(this.playArea.height/2)-50,"P2");
 
-        Game.playArea.objects.push(upperBoundary,lowerBoundary,
+        Game.playArea.objects.push(upperBoundary,lowerBoundary,leftBoundary,rightBoundary,
             ball,leftPaddle,rightPaddle);
         Game.playArea.moveableObjects.push(ball,leftPaddle,rightPaddle);
-        Game.playArea.controllableObjects.push(leftPaddle,rightPaddle);
+        Game.playArea.controllableObjects.push(ball,leftPaddle,rightPaddle);
         Game.playArea.collideableObjects.push(
-            upperBoundary,lowerBoundary,
+            upperBoundary,lowerBoundary,leftBoundary,rightBoundary,
             ball,leftPaddle,rightPaddle);
         
         Game.canvas = document.getElementById("gameCanvas");
@@ -39,10 +43,6 @@ const Game = {
         Game.canvasContext = Game.canvas.getContext("2d");
 
         Controller.init();
-
-        //console.log(Game.playArea.objects.forEach((el) => {
-        //    console.log(`${el.id}, ${el.xpos}, ${el.ypos}, ${el.width}, ${el.height}`);
-        //}));
 
         //Check time right before first update loop
         Game.tLastFrame = window.performance.now();
