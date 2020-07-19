@@ -31,10 +31,9 @@ class View {
                 0 + yOffset,
                 this._level.width * xScaleFactor,
                 this._level.height * yScaleFactor);
-            //context.stroke();
         };
 
-        this._level.objects.forEach((el) => {
+        this._level.entities.objects.forEach((el) => {
             if ( true ) { // TODO: look for sprite in draw() method
                 context.beginPath();
                 context.fillStyle = "#888888";

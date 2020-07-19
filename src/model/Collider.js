@@ -5,7 +5,6 @@ const Collider = {
         gameObjects.forEach(obj => {
             gameObjects.forEach(target => {
                 if (obj === target) return; //continue loop
-                let newCollision = {};
                 if (obj.xpos + obj.width > target.xpos
                     && obj.xpos < target.xpos + target.width
                     && obj.ypos + obj.height > target.ypos
@@ -19,8 +18,6 @@ const Collider = {
 
     runCollisions : function(collisions) {
         collisions.forEach(obj => {
-            //console.log(obj.collidingObj.constructor.name +
-            //    "->" + obj.withObj.constructor.name);
             obj.collidingObj.collide(obj.withObj);
         });
     }

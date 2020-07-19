@@ -72,7 +72,7 @@ class MovingObject extends GameObject {
         this._drag = drag;
     }
 
-    set velocity(terminalVelocity) {
+    set terminalVelocity(terminalVelocity) {
         this._terminalVelocity = terminalVelocity;
     }
 

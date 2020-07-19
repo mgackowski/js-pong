@@ -8,6 +8,8 @@ class Ball extends MovingObject {
 
     constructor(xpos,ypos) {
         super(xpos,ypos,20,20);
+        this._initialXpos = xpos;
+        this._initialYpos = ypos;
         this._velocity.x = 0;
         this._velocity.y = 0;
         this._state = "stopped" // "stopped"||"moving"
@@ -37,10 +39,8 @@ class Ball extends MovingObject {
                     this._velocity.y *= -1;
                     break;
                 case "left" :
-                    //
                     break;
                 case "right" :
-                    //
                     break;
             };
         };
