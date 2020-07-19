@@ -1,4 +1,4 @@
-import GameObject from "../../lib/model/GameObject";
+import GameObject from "../../../lib/model/GameObject";
 
 class MovingObject extends GameObject {
 
@@ -72,7 +72,7 @@ class MovingObject extends GameObject {
         this._drag = drag;
     }
 
-    set velocity(terminalVelocity) {
+    set terminalVelocity(terminalVelocity) {
         this._terminalVelocity = terminalVelocity;
     }
 

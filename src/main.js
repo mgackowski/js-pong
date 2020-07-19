@@ -1,35 +1,15 @@
-import Paddle from './model/Paddle.js';
-import Level from './model/Level.js';
-import Ball from './model/Ball.js';
-import View from './View.js';
-import Controller from './Controller.js';
-import GameObject from './model/GameObject.js';
-import Collider from './Collider.js';
-import LevelBoundary from './model/LevelBoundary.js';
+import View from './model/View.js';
+import Controller from './model/Controller.js';
+import Collider from './model/Collider.js';
+import MainLevel from './model/levels/MainLevel';
 
 const Game = {
 
     init : function() {
 
-        Game.playArea = new Level(1000,600);
-
-        // Screen boundary represented as collision objects
-        let upperBoundary = new LevelBoundary(
-            Game.playArea.width,Game.playArea.height,"upper");
-        let lowerBoundary = new LevelBoundary(
-            Game.playArea.width,Game.playArea.height,"lower");
-
-        let ball = new Ball((this.playArea.width/2)-10,(this.playArea.height/2)-10);
-        let leftPaddle = new Paddle(10,(this.playArea.height/2)-50);
-        let rightPaddle = new Paddle(this.playArea.width-30,(this.playArea.height/2)-50);
-
-        Game.playArea.objects.push(upperBoundary,lowerBoundary,
-            ball,leftPaddle,rightPaddle);
-        Game.playArea.moveableObjects.push(ball,leftPaddle,rightPaddle);
-        Game.playArea.controllableObjects.push(leftPaddle,rightPaddle);
-        Game.playArea.collideableObjects.push(
-            upperBoundary,lowerBoundary,
-            ball,leftPaddle,rightPaddle);
+        Game.score = {P1:0,P2:0};
+        Game.playArea = new MainLevel(1000,600);
+        Game.playArea.init();
         
         Game.canvas = document.getElementById("gameCanvas");
         Game.gameView = new View(
@@ -40,10 +20,6 @@ const Game = {
 
         Controller.init();
 
-        //console.log(Game.playArea.objects.forEach((el) => {
-        //    console.log(`${el.id}, ${el.xpos}, ${el.ypos}, ${el.width}, ${el.height}`);
-        //}));
-
         //Check time right before first update loop
         Game.tLastFrame = window.performance.now();
     },
@@ -52,7 +28,7 @@ const Game = {
 
         window.requestAnimationFrame(Game.main);
 
-        //Print second for testing
+        //Print second
         //console.log(Math.floor(tCurrentFrame/1000) + 's');
 
         let elapsedTime = tCurrentFrame - Game.tLastFrame;
@@ -65,19 +41,19 @@ const Game = {
 
     update : function(elapsedTime) {
 
-        Game.playArea.controllableObjects.forEach((el) => {
+        Game.playArea.entities.controllableObjects.forEach((el) => {
             el.control();
         });
 
-        Game.playArea.objects.forEach((el) => {
+        Game.playArea.entities.objects.forEach((el) => {
             el.step();
         });
 
-        Game.playArea.moveableObjects.forEach((el) => {
+        Game.playArea.entities.moveableObjects.forEach((el) => {
             el.move(elapsedTime);
         });
 
-        let collisions = Collider.findCollisions(Game.playArea.collideableObjects);
+        let collisions = Collider.findCollisions(Game.playArea.entities.collideableObjects);
         Collider.runCollisions(collisions);
 
     },
