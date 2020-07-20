@@ -1,4 +1,4 @@
-import GameObject from "../../../lib/model/GameObject";
+import GameObject from "./GameObject";
 
 class MovingObject extends GameObject {
 

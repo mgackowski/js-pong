@@ -1,5 +1,4 @@
-import MovingObject from "../../../lib/model/MovingObject";
-import GameObject from "../../../lib/model/GameObject";
+import MovingObject from "./MovingObject";
 import LevelBoundary from "./LevelBoundary";
 import Paddle from "./Paddle";
 import Controller from "../Controller";
@@ -17,15 +16,17 @@ class Ball extends MovingObject {
 
     control() {
         if(this._state == "stopped" && Controller.confirm) {
-            //TODO: small chance might return 0;
             this._velocity.x = Math.sign(Math.random()-0.5) * 200;
+            if(this._velocity.x == 0) {
+                this._velocity.x = 100;
+            };
             this._velocity.y = Math.sign(Math.random()-0.5) * 200;
             this._state = "moving";
         }
     }
 
     collide(withObj) {
-        let angleRestriction = 0.7; //franction of 180 degree range to keep bounce more horizontal
+        let angleRestriction = 0.7; //fraction of 180 degree range to keep bounce more horizontal
         let speedChange = 1.1; //after each collision
 
         if(withObj instanceof LevelBoundary) {

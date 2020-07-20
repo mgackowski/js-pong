@@ -1,4 +1,4 @@
-import MovingObject from "../../../lib/model/MovingObject";
+import MovingObject from "./MovingObject";
 import Controller from "../Controller";
 import LevelBoundary from "./LevelBoundary";
 

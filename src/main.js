@@ -7,13 +7,12 @@ const Game = {
 
     init() {
 
-        this.score = {P1:0,P2:0};
-        this.playArea = new MainLevel(1000,600);
-        this.playArea.init();
+        this.stage = new MainLevel(1000,600);
+        this.stage.init();
         
         this.canvas = document.getElementById("gameCanvas");
         this.gameView = new View(
-            this.playArea,
+            this.stage,
             this.canvas.width,
             this.canvas.height);
             this.canvasContext = this.canvas.getContext("2d");
@@ -41,19 +40,19 @@ const Game = {
 
     update(elapsedTime) {
 
-        this.playArea.entities.controllableObjects.forEach((el) => {
+        this.stage.entities.controllableObjects.forEach((el) => {
             el.control();
         });
 
-        this.playArea.entities.objects.forEach((el) => {
+        this.stage.entities.objects.forEach((el) => {
             el.step();
         });
 
-        this.playArea.entities.moveableObjects.forEach((el) => {
+        this.stage.entities.moveableObjects.forEach((el) => {
             el.move(elapsedTime);
         });
 
-        let collisions = Collider.findCollisions(this.playArea.entities.collideableObjects);
+        let collisions = Collider.findCollisions(this.stage.entities.collideableObjects);
         Collider.runCollisions(collisions);
 
     },
