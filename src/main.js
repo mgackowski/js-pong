@@ -5,65 +5,65 @@ import MainLevel from './model/levels/MainLevel';
 
 const Game = {
 
-    init : function() {
+    init() {
 
-        Game.score = {P1:0,P2:0};
-        Game.playArea = new MainLevel(1000,600);
-        Game.playArea.init();
+        this.score = {P1:0,P2:0};
+        this.playArea = new MainLevel(1000,600);
+        this.playArea.init();
         
-        Game.canvas = document.getElementById("gameCanvas");
-        Game.gameView = new View(
-            Game.playArea,
-            Game.canvas.width,
-            Game.canvas.height);
-        Game.canvasContext = Game.canvas.getContext("2d");
+        this.canvas = document.getElementById("gameCanvas");
+        this.gameView = new View(
+            this.playArea,
+            this.canvas.width,
+            this.canvas.height);
+            this.canvasContext = this.canvas.getContext("2d");
 
         Controller.init();
 
         //Check time right before first update loop
-        Game.tLastFrame = window.performance.now();
+        this.tLastFrame = window.performance.now();
     },
 
-    main : function(tCurrentFrame = window.performance.now()) {
+    main(tCurrentFrame = window.performance.now()) {
 
-        window.requestAnimationFrame(Game.main);
+        window.requestAnimationFrame(() => this.main(tCurrentFrame = window.performance.now()));
 
         //Print second
         //console.log(Math.floor(tCurrentFrame/1000) + 's');
 
         let elapsedTime = tCurrentFrame - Game.tLastFrame;
-        Game.tLastFrame = tCurrentFrame;
-        Game.update(elapsedTime);
+        this.tLastFrame = tCurrentFrame;
+        this.update(elapsedTime);
 
-        Game.render();
+        this.render();
 
     },
 
-    update : function(elapsedTime) {
+    update(elapsedTime) {
 
-        Game.playArea.entities.controllableObjects.forEach((el) => {
+        this.playArea.entities.controllableObjects.forEach((el) => {
             el.control();
         });
 
-        Game.playArea.entities.objects.forEach((el) => {
+        this.playArea.entities.objects.forEach((el) => {
             el.step();
         });
 
-        Game.playArea.entities.moveableObjects.forEach((el) => {
+        this.playArea.entities.moveableObjects.forEach((el) => {
             el.move(elapsedTime);
         });
 
-        let collisions = Collider.findCollisions(Game.playArea.entities.collideableObjects);
+        let collisions = Collider.findCollisions(this.playArea.entities.collideableObjects);
         Collider.runCollisions(collisions);
 
     },
 
-    render : function()  {
-        Game.canvasContext.fillStyle = "#111111"
-        Game.canvasContext.fillRect(
+    render()  {
+        this.canvasContext.fillStyle = "#111111"
+        this.canvasContext.fillRect(
             0,0,
-            Game.canvas.width,Game.canvas.height);
-        Game.gameView.render(Game.canvasContext);
+            this.canvas.width,this.canvas.height);
+        this.gameView.render(Game.canvasContext);
     },
 
 };
