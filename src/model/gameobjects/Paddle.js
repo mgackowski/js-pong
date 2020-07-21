@@ -35,8 +35,6 @@ class Paddle extends MovingObject {
     }
 
     control() {
-        let keyPressAcceleration = 90000;
-        let keyReleaseDrag = 7000;
 
         switch (this._controlledBy) {
             case "AI" :
@@ -48,14 +46,14 @@ class Paddle extends MovingObject {
             case "P1":
                 if (Controller.leftShipUp ? !Controller.leftShipDown : !Controller.leftShipDown) {
                     this.acceleration.y = 0;
-                    this.drag = keyReleaseDrag;
+                    this.drag = this._movementDrag;
                 };
                 if (Controller.leftShipUp) {
-                    this.acceleration.y = -keyPressAcceleration;
+                    this.acceleration.y = -this._movementSpeed;
                     this.drag = 0;
                 };
                 if (Controller.leftShipDown) {
-                    this.acceleration.y = keyPressAcceleration;
+                    this.acceleration.y = this._movementSpeed;
                     this.drag = 0;
                 };
                 break;
@@ -63,14 +61,14 @@ class Paddle extends MovingObject {
             case "P2":
                 if (Controller.rightShipUp ? !Controller.rightShipDown : !Controller.rightShipDown) {
                     this.acceleration.y = 0;
-                    this.drag = keyReleaseDrag;
+                    this.drag = this._movementDrag;
                 };
                 if (Controller.rightShipUp) {
-                    this.acceleration.y = -keyPressAcceleration;
+                    this.acceleration.y = -this._movementSpeed;
                     this.drag = 0;
                 };
                 if (Controller.rightShipDown) {
-                    this.acceleration.y = keyPressAcceleration;
+                    this.acceleration.y = this._movementSpeed;
                     this.drag = 0;
                 };
                 break;
