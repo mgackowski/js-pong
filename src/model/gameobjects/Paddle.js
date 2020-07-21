@@ -1,6 +1,7 @@
 import MovingObject from "./MovingObject";
 import Controller from "../Controller";
 import LevelBoundary from "./LevelBoundary";
+import Ball from "./Ball";
 
 class Paddle extends MovingObject {
 
@@ -8,6 +9,29 @@ class Paddle extends MovingObject {
         super(xpos,ypos,20,100);
         this._terminalVelocity = 900;
         this._controlledBy = controlledBy; // "P1"||"P2"||"AI"
+
+        this._movementSpeed = 90000;
+        this._movementDrag = 7000;
+    }
+
+    step() {
+        if(this._controlledBy != "AI") return;
+
+        let margin = 50;
+        let balls = this._entityManager.objects.filter(el => el instanceof Ball);
+        if (Math.abs(balls[0].center.y - this.center.y) < margin) {
+            this.acceleration.y = 0;
+            this.drag = this._movementDrag;
+        }
+        else if (balls[0].center.y < this.center.y && balls[0].velocity.x > 0) {
+            this.acceleration.y = -this._movementSpeed;
+            this.drag = 0;
+        }
+        else if (balls[0].center.y > this.center.y && balls[0].velocity.x > 0) {
+            this.acceleration.y = this._movementSpeed;
+            this.drag = 0;
+        };
+
     }
 
     control() {

@@ -7,6 +7,7 @@ class GameObject {
         this._ypos = ypos;
         this._width = width;
         this._height = height;
+        this._entityManager = null;
     }
     step() {
         //custom step event
@@ -35,6 +36,9 @@ class GameObject {
             y: this._ypos + this._height / 2
         }
     }
+    get entityManager() {
+        return this._entityManager;
+    }
     set xpos(xpos) {
         this._xpos = xpos;
     }
@@ -46,6 +50,9 @@ class GameObject {
     }
     set height(height) {
         this._height = height;
+    }
+    set entityManager(entityManager) {
+        this._entityManager = entityManager;
     }
 }
 
