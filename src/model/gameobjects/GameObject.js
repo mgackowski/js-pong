@@ -12,8 +12,15 @@ class GameObject {
     step() {
         //custom step event
     }
-    draw(context) {
-        //custom draw event
+    draw(context,xScale,yScale,xOffset,yOffset) {
+        context.beginPath();
+        context.fillStyle = "#888888";
+        context.fillRect(
+            this._xpos * xScale + xOffset,
+            this._ypos * yScale + yOffset,
+            this._width * xScale,
+            this._height * yScale);
+        context.stroke();
     }
     get id() {
         return this._id;

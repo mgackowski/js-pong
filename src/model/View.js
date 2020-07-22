@@ -34,18 +34,7 @@ class View {
         };
 
         this._level.entities.objects.forEach((el) => {
-            if ( true ) { // TODO: look for sprite in draw() method
-                context.beginPath();
-                context.fillStyle = "#888888";
-                context.fillRect(
-                    el.xpos * xScaleFactor + xOffset,
-                    el.ypos * yScaleFactor + yOffset,
-                    el.width * xScaleFactor,
-                    el.height * yScaleFactor);
-                context.stroke();
-            } else {
-                //use sprite
-            };
+            el.draw(context,xScaleFactor,yScaleFactor,xOffset,yOffset);
         });
 
     }

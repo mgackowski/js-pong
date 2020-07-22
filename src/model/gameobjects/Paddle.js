@@ -14,6 +14,10 @@ class Paddle extends MovingObject {
         this._movementDrag = 7000;
     }
 
+    get controlledBy() {
+        return this._controlledBy;
+    }
+
     step() {
         if(this._controlledBy != "AI") return;
 
