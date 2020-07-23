@@ -2,6 +2,8 @@ import Level from "./Level";
 import LevelBoundary from "../gameobjects/LevelBoundary";
 import Ball from "../gameobjects/Ball";
 import Paddle from "../gameobjects/Paddle";
+import GameLogic from "../gameobjects/GameLogic";
+import ScoreDisplay from "../gameobjects/ScoreDisplay";
 
 class MainLevel extends Level {
 
@@ -23,8 +25,12 @@ class MainLevel extends Level {
             {moveable:true, controllable:true, collideable:true});
         this._entities.add(new Paddle(10,(this._height/2)-50,"P1"),
             {moveable:true, controllable:true, collideable:true});
-        this._entities.add(new Paddle(this._width-30,(this._height/2)-50,"P2"),
+        this._entities.add(new Paddle(this._width-30,(this._height/2)-50,"AI"),
             {moveable:true, controllable:true, collideable:true});
+
+        this._entities.add(new GameLogic(),{});
+        this._entities.add(new ScoreDisplay(0,0,"P1"),{});
+        this._entities.add(new ScoreDisplay(this._width,0,"P2"),{});
     };
 
 };

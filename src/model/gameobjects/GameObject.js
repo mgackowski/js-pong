@@ -7,12 +7,20 @@ class GameObject {
         this._ypos = ypos;
         this._width = width;
         this._height = height;
+        this._entityManager = null;
     }
     step() {
         //custom step event
     }
-    draw(context) {
-        //custom draw event
+    draw(context,xScale,yScale,xOffset,yOffset) {
+        context.beginPath();
+        context.fillStyle = "#888888";
+        context.fillRect(
+            this._xpos * xScale + xOffset,
+            this._ypos * yScale + yOffset,
+            this._width * xScale,
+            this._height * yScale);
+        context.stroke();
     }
     get id() {
         return this._id;
@@ -35,6 +43,9 @@ class GameObject {
             y: this._ypos + this._height / 2
         }
     }
+    get entityManager() {
+        return this._entityManager;
+    }
     set xpos(xpos) {
         this._xpos = xpos;
     }
@@ -46,6 +57,9 @@ class GameObject {
     }
     set height(height) {
         this._height = height;
+    }
+    set entityManager(entityManager) {
+        this._entityManager = entityManager;
     }
 }
 

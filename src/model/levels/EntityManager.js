@@ -11,6 +11,7 @@ class EntityManager {
         @param props Object with boolean properties: moveable, controllable and/or collideable
     */
     add(object,props) {
+        object.entityManager = this;
         this._objects.push(object);
         if(props.hasOwnProperty("moveable")) this._moveableObjects.push(object);
         if(props.hasOwnProperty("controllable")) this._controllableObjects.push(object);
@@ -18,10 +19,10 @@ class EntityManager {
     };
 
     remove(object) {
-        this._objects.filter(entity => entity !== object);
-        this._moveableObjects.filter(entity => entity !== object);
-        this._controllableObjects.filter(entity => entity !== object);
-        this._collideableObjects.filter(entity => entity !== object);
+        this._objects = this._objects.filter(entity => entity !== object);
+        this._moveableObjects = this._moveableObjects.filter(entity => entity !== object);
+        this._controllableObjects = this._controllableObjects.filter(entity => entity !== object);
+        this._collideableObjects = this._collideableObjects.filter(entity => entity !== object);
     };
 
     get objects() {
