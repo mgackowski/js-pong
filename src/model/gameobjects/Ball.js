@@ -2,6 +2,7 @@ import MovingObject from "./MovingObject";
 import LevelBoundary from "./LevelBoundary";
 import Paddle from "./Paddle";
 import Controller from "../Controller";
+import Jukebox from "../Jukebox";
 
 class Ball extends MovingObject {
 
@@ -40,16 +41,20 @@ class Ball extends MovingObject {
                 case "lower" :
                     this._ypos = withObj.ypos - this._height;
                     this._velocity.y *= -1;
+                    Jukebox.playSound("beep_short_mid");
                     break;
                 case "upper" :
                     this._ypos = withObj.ypos + withObj.height;
                     this._velocity.y *= -1;
+                    Jukebox.playSound("beep_short_mid");
                     break;
                 case "left" :
                     this._state = "over_left";
+                    Jukebox.playSound("beep_long_low");
                     break;
                 case "right" :
                     this._state = "over_right";
+                    Jukebox.playSound("beep_long_low");
                     break;
             };
         };
@@ -68,6 +73,8 @@ class Ball extends MovingObject {
                 this._velocity.x = -currentSpeed * Math.cos(newAngle) * speedChange;
                 this._velocity.y = -currentSpeed * Math.sin(newAngle) * speedChange;
             };
+
+            Jukebox.playSound("beep_short_high");
         };
     }
 
