@@ -29,8 +29,8 @@ class MainLevel extends Level {
             {moveable:true, controllable:true, collideable:true});
 
         this._entities.add(new GameLogic(),{});
-        this._entities.add(new ScoreDisplay(0,0,"P1"),{});
-        this._entities.add(new ScoreDisplay(this._width,0,"P2"),{});
+        //this._entities.add(new ScoreDisplay(0,0,"P1"),{});
+        //this._entities.add(new ScoreDisplay(this._width,0,"P2"),{});
     };
 
 };

@@ -1,3 +1,5 @@
+import SpriteRepository from "./SpriteRepository";
+
 class View {
 
     constructor(level,targetViewWidth,targetViewHeight) {
@@ -30,7 +32,16 @@ class View {
                 0 + xOffset,
                 0 + yOffset,
                 this._level.width * xScaleFactor,
-                this._level.height * yScaleFactor);
+                this._level.height * yScaleFactor
+            );
+
+            context.drawImage(
+                SpriteRepository.getSprite("bg"),
+                0 + xOffset,
+                0 + yOffset,
+                this._level.width * xScaleFactor,
+                this._level.height * yScaleFactor
+            );
         };
 
         this._level.entities.objects.forEach((el) => {

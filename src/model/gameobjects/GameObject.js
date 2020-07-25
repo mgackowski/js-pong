@@ -14,7 +14,7 @@ class GameObject {
     }
     draw(context,xScale,yScale,xOffset,yOffset) {
         context.beginPath();
-        context.fillStyle = "#888888";
+        context.fillStyle = "#AAA";
         context.fillRect(
             this._xpos * xScale + xOffset,
             this._ypos * yScale + yOffset,
