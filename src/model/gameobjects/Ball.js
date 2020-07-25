@@ -3,6 +3,7 @@ import LevelBoundary from "./LevelBoundary";
 import Paddle from "./Paddle";
 import Controller from "../Controller";
 import Jukebox from "../Jukebox";
+import Glow from "./Glow";
 
 class Ball extends MovingObject {
 
@@ -11,7 +12,7 @@ class Ball extends MovingObject {
         this._velocity.x = 0;
         this._velocity.y = 0;
         this._spawnPos = {x:xpos,y:ypos};
-        this._state = "stopped" // "stopped"||"moving"||"over_left"||"over_right"
+        this._state = "stopped"; // "stopped"||"moving"||"over_left"||"over_right"
     }
 
     get state() {
@@ -57,6 +58,7 @@ class Ball extends MovingObject {
                     Jukebox.playSound("beep_long_low");
                     break;
             };
+            this._entityManager.add(new Glow(this,"white",0.01),{});
         };
 
         if(withObj instanceof Paddle) {
@@ -67,15 +69,21 @@ class Ball extends MovingObject {
                 this._xpos = withObj.xpos + withObj._width;
                 this._velocity.x = currentSpeed * Math.cos(newAngle) * speedChange;
                 this._velocity.y = -currentSpeed * Math.sin(newAngle) * speedChange;
+                this._entityManager.add(new Glow(this,withObj.colour,0.03),{});
+                this._entityManager.add(new Glow(withObj,withObj.colour,0.01),{});
             }
             else if (this._velocity.x > 0) {
                 this._xpos = withObj.xpos - this._width;
                 this._velocity.x = -currentSpeed * Math.cos(newAngle) * speedChange;
                 this._velocity.y = -currentSpeed * Math.sin(newAngle) * speedChange;
+                this._entityManager.add(new Glow(this,withObj.colour,0.03),{});
+                this._entityManager.add(new Glow(withObj,withObj.colour,0.01),{});
             };
 
             Jukebox.playSound("beep_short_high");
         };
+
+        
     }
 
 }

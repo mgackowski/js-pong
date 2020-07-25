@@ -23,9 +23,9 @@ class MainLevel extends Level {
 
         this._entities.add(new Ball((this._width/2)-10,(this._height/2)-10),
             {moveable:true, controllable:true, collideable:true});
-        this._entities.add(new Paddle(10,(this._height/2)-50,"P1"),
+        this._entities.add(new Paddle(10,(this._height/2)-50,"P1","#c4c5ff"),
             {moveable:true, controllable:true, collideable:true});
-        this._entities.add(new Paddle(this._width-30,(this._height/2)-50,"AI"),
+        this._entities.add(new Paddle(this._width-30,(this._height/2)-50,"AI","#ffc4c4"),
             {moveable:true, controllable:true, collideable:true});
 
         this._entities.add(new GameLogic(),{});

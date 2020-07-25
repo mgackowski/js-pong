@@ -5,17 +5,22 @@ import Ball from "./Ball";
 
 class Paddle extends MovingObject {
 
-    constructor(xpos,ypos,controlledBy) {
+    constructor(xpos,ypos,controlledBy,colour) {
         super(xpos,ypos,20,100);
         this._terminalVelocity = 900;
         this._controlledBy = controlledBy; // "P1"||"P2"||"AI"
 
         this._movementSpeed = 90000;
         this._movementDrag = 7000;
+        this._colour = colour;
     }
 
     get controlledBy() {
         return this._controlledBy;
+    }
+
+    get colour() {
+        return this._colour;
     }
 
     step() {
