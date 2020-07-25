@@ -28,6 +28,10 @@ class LevelBoundary extends GameObject {
         //do nothing
     }
 
+    draw(context,xScale,yScale,xOffset,yOffset) {
+        //don't draw
+    }
+
     get type() {
         return this._type;
     }

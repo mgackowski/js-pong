@@ -58,7 +58,7 @@ const Game = {
     },
 
     render()  {
-        this.canvasContext.fillStyle = "#111111"
+        this.canvasContext.fillStyle = "black";
         this.canvasContext.fillRect(
             0,0,
             this.canvas.width,this.canvas.height);
