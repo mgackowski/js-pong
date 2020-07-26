@@ -25,6 +25,13 @@ class EntityManager {
         this._collideableObjects = this._collideableObjects.filter(entity => entity !== object);
     };
 
+    clear() {
+        this._objects = [];
+        this._moveableObjects = [];
+        this._controllableObjects = [];
+        this._collideableObjects = [];
+    };
+
     get objects() {
         return this._objects;
     };

@@ -2,12 +2,15 @@ import EntityManager from "../levels/EntityManager";
 import GameObject from "./GameObject";
 import Ball from "./Ball";
 import ScoreDisplay from "./ScoreDisplay";
+import Controller from "../Controller";
+import LevelManager from "../levels/LevelManager";
 
 class GameLogic extends GameObject {
 
-    constructor() {
+    constructor(levelManager) {
         super(0,0,0,0);
         this._score = {P1:0,P2:0};
+        this._levelManager = levelManager;
     }
 
     get score() {
@@ -17,22 +20,26 @@ class GameLogic extends GameObject {
     step() {
         let balls = this._entityManager.objects.filter(el => el instanceof Ball);
 
-        //TODO: Iterate through all balls found
-        if(balls.length <= 0) return;
-        if(balls[0].state == "over_left" || balls[0].state == "over_right") {
-            this._entityManager.remove(balls[0]);
-            this._entityManager.add(new Ball(balls[0].spawnPos.x,balls[0].spawnPos.y),
-            {moveable:true, controllable:true, collideable:true});
-
-            if(balls[0].state == "over_left") {
-                this._score.P2++;
-            }
-            else if(balls[0].state == "over_right") {
-                this._score.P1++;
+        balls.forEach( ball => {
+            if(ball.state == "over_left" || ball.state == "over_right") {
+                this._entityManager.remove(ball);
+                this._entityManager.add(new Ball(ball.spawnPos.x,ball.spawnPos.y),
+                {moveable:true, controllable:true, collideable:true});
+    
+                if(ball.state == "over_left") {
+                    this._score.P2++;
+                }
+                else if(ball.state == "over_right") {
+                    this._score.P1++;
+                };
+    
+                this._entityManager.add(new ScoreDisplay(-100,-100,"P1"),{});
+                this._entityManager.add(new ScoreDisplay(-100,-100,"P2"),{});
             };
+        });
 
-            this._entityManager.add(new ScoreDisplay(-100,-100,"P1"),{});
-            this._entityManager.add(new ScoreDisplay(-100,-100,"P2"),{});
+        if(Controller.nextLevel) {
+            this._levelManager.gotoNextLevel();
         };
     }
 

@@ -1,18 +1,20 @@
 import SpriteRepository from "./SpriteRepository";
+import LevelManager from "./levels/LevelManager";
 
 class View {
 
-    constructor(level,targetViewWidth,targetViewHeight) {
-        this._level = level;
+    constructor(levelManager,targetViewWidth,targetViewHeight) {
+        this._levelManager = levelManager;
         this._width = targetViewWidth;
         this._height = targetViewHeight;
     };
 
     render(context) {
         let keepProportions = true;
+        let level = this._levelManager.levels[this._levelManager.currentLevel];
 
-        let xScaleFactor = this._width / this._level.width;
-        let yScaleFactor = this._height / this._level.height;
+        let xScaleFactor = this._width / level.width;
+        let yScaleFactor = this._height / level.height;
 
         let xOffset = 0;
         let yOffset = 0;
@@ -20,10 +22,10 @@ class View {
         if (keepProportions) {
             if (xScaleFactor > yScaleFactor) {
                 xScaleFactor = yScaleFactor;
-                xOffset = (this._width - (this._level.width * xScaleFactor)) / 2;
+                xOffset = (this._width - (level.width * xScaleFactor)) / 2;
             } else {
                 yScaleFactor = xScaleFactor;
-                yOffset = (this._height - (this._level.height * yScaleFactor)) / 2;
+                yOffset = (this._height - (level.height * yScaleFactor)) / 2;
             };
 
             /* draw level background */
@@ -31,20 +33,20 @@ class View {
             context.fillRect(
                 0 + xOffset,
                 0 + yOffset,
-                this._level.width * xScaleFactor,
-                this._level.height * yScaleFactor
+                level.width * xScaleFactor,
+                level.height * yScaleFactor
             );
 
             context.drawImage(
                 SpriteRepository.getSprite("bg"),
                 0 + xOffset,
                 0 + yOffset,
-                this._level.width * xScaleFactor,
-                this._level.height * yScaleFactor
+                level.width * xScaleFactor,
+                level.height * yScaleFactor
             );
         };
 
-        this._level.entities.objects.forEach((el) => {
+        level.entities.objects.forEach((el) => {
             el.draw(context,xScaleFactor,yScaleFactor,xOffset,yOffset);
         });
 

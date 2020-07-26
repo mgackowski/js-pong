@@ -1,4 +1,5 @@
 import EntityManager from "./EntityManager";
+import LevelManager from "./LevelManager";
 
 class Level {
 
@@ -6,6 +7,7 @@ class Level {
         this._width = width;
         this._height = height;
         this._entities = new EntityManager();
+        this._levelManager = null;
     };
 
     get width() {
@@ -16,6 +18,9 @@ class Level {
     };
     get entities() {
         return this._entities;
+    };
+    set levelManager(levelManager) {
+        this._levelManager = levelManager;
     };
 
     init() {};

@@ -2,20 +2,26 @@ import View from './model/View.js';
 import Controller from './model/Controller.js';
 import Collider from './model/Collider.js';
 import MainLevel from './model/levels/MainLevel';
+import TripleBallLevel from './model/levels/TripleBallLevel';
+import DoublePaddleLevel from './model/levels/DoublePaddleLevel';
+import LevelManager from './model/levels/LevelManager.js';
 
 const Game = {
 
     init() {
 
-        this.stage = new MainLevel(1000,600);
-        this.stage.init();
+        this.levelManager = new LevelManager();
+        this.levelManager.add(new MainLevel(1000,600));
+        this.levelManager.add(new DoublePaddleLevel(1000,600));
+        this.levelManager.add(new TripleBallLevel(1000,600));
+        this.levelManager.gotoLevel(0);
         
         this.canvas = document.getElementById("gameCanvas");
         this.gameView = new View(
-            this.stage,
+            this.levelManager,
             this.canvas.width,
             this.canvas.height);
-            this.canvasContext = this.canvas.getContext("2d");
+        this.canvasContext = this.canvas.getContext("2d");
 
         Controller.init();
 
@@ -40,19 +46,21 @@ const Game = {
 
     update(elapsedTime) {
 
-        this.stage.entities.controllableObjects.forEach((el) => {
+        let entities = this.levelManager.levels[this.levelManager.currentLevel].entities;
+
+        entities.controllableObjects.forEach((el) => {
             el.control();
         });
 
-        this.stage.entities.objects.forEach((el) => {
+        entities.objects.forEach((el) => {
             el.step();
         });
 
-        this.stage.entities.moveableObjects.forEach((el) => {
+        entities.moveableObjects.forEach((el) => {
             el.move(elapsedTime);
         });
 
-        let collisions = Collider.findCollisions(this.stage.entities.collideableObjects);
+        let collisions = Collider.findCollisions(entities.collideableObjects);
         Collider.runCollisions(collisions);
 
     },

@@ -5,6 +5,7 @@ const Controller = {
     rightShipUp : false,
     rightShipDown : false,
     confirm : false,
+    nextLevel : false,
 
     init : function() {
 
@@ -40,6 +41,9 @@ const Controller = {
             case "Spacebar":
             case " ":
                 this.confirm = isPressed;
+                break;
+            case "Shift":
+                this.nextLevel = isPressed;
                 break;
             default:
                 return;

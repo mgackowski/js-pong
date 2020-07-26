@@ -26,20 +26,27 @@ class Paddle extends MovingObject {
     step() {
         if(this._controlledBy != "AI") return;
 
-        let margin = 50;
-        let balls = this._entityManager.objects.filter(el => el instanceof Ball);
-        if (Math.abs(balls[0].center.y - this.center.y) < margin) {
-            this.acceleration.y = 0;
-            this.drag = this._movementDrag;
-        }
-        else if (balls[0].center.y < this.center.y && balls[0].velocity.x > 0) {
-            this.acceleration.y = -this._movementSpeed;
-            this.drag = 0;
-        }
-        else if (balls[0].center.y > this.center.y && balls[0].velocity.x > 0) {
-            this.acceleration.y = this._movementSpeed;
-            this.drag = 0;
-        };
+        let margin = 70;
+        let balls = this._entityManager.objects.filter(
+            el => el instanceof Ball && el.state == "moving");
+        balls.sort((a,b) => {
+            return a.xpos - b.xpos;
+        });
+        balls.forEach( ball => {
+            if (Math.abs(ball.center.y - this.center.y) < margin) {
+                this.acceleration.y = 0;
+                this.drag = this._movementDrag;
+            }
+            else if (ball.center.y < this.center.y && ball.velocity.x > 0) {
+                this.acceleration.y = -this._movementSpeed;
+                this.drag = 0;
+            }
+            else if (ball.center.y > this.center.y && ball.velocity.x > 0) {
+                this.acceleration.y = this._movementSpeed;
+                this.drag = 0;
+            };
+        });
+
 
     }
 
