@@ -7,6 +7,7 @@ class View {
         this._levelManager = levelManager;
         this._width = targetViewWidth;
         this._height = targetViewHeight;
+        this._backgroundImage = SpriteRepository.getSprite("bg");
     };
 
     render(context) {
@@ -38,7 +39,7 @@ class View {
             );
 
             context.drawImage(
-                SpriteRepository.getSprite("bg"),
+                this._backgroundImage,
                 0 + xOffset,
                 0 + yOffset,
                 level.width * xScaleFactor,
