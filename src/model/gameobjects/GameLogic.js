@@ -11,6 +11,8 @@ class GameLogic extends GameObject {
         super(0,0,0,0);
         this._score = {P1:0,P2:0};
         this._levelManager = levelManager;
+
+        this._levelTransition = 30;
     }
 
     get score() {
@@ -18,8 +20,10 @@ class GameLogic extends GameObject {
     }
 
     step() {
-        let balls = this._entityManager.objects.filter(el => el instanceof Ball);
 
+        // process scoring
+
+        let balls = this._entityManager.objects.filter(el => el instanceof Ball);
         balls.forEach( ball => {
             if(ball.state == "over_left" || ball.state == "over_right") {
                 this._entityManager.remove(ball);
@@ -38,7 +42,11 @@ class GameLogic extends GameObject {
             };
         });
 
-        if(Controller.nextLevel) {
+        // handle next level transition
+
+        if(this._levelTransition > 0) this._levelTransition--;
+
+        if(Controller.nextLevel && this._levelTransition == 0) {
             this._levelManager.gotoNextLevel();
         };
     }

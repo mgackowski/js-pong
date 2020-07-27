@@ -1,8 +1,9 @@
 class LevelManager {
 
-    constructor() {
+    constructor(viewManager) {
         this._levels = [];
         this._currentLevel = 0;
+        this._viewManager = viewManager;
     }
 
     get levels() {
@@ -23,9 +24,11 @@ class LevelManager {
     }
 
     gotoLevel(levelNumber) {
+        this._viewManager.deactivate(this._currentLevel);
         this.unloadLevel(this.currentLevel);
         this._currentLevel = levelNumber;
         this._levels[levelNumber].init();
+        this._viewManager.activate(levelNumber);
     }
 
     unloadLevel(levelNumber) {
